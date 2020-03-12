@@ -1,7 +1,7 @@
 # The only assumption we make about this FROM is that it has a JRE in path
 FROM adoptopenjdk/openjdk11:jdk-11.0.5_10-slim@sha256:3331aafeb25e66ab2ca213b0a1dd863fc5f6eb0160ec9c9145028ebe3db334fe
 
-ENV KAFKA_VERSION=2.3.1 SCALA_VERSION=2.12
+ENV KAFKA_VERSION=2.4.1 SCALA_VERSION=2.13
 
 RUN set -ex; \
   export DEBIAN_FRONTEND=noninteractive; \
@@ -14,8 +14,8 @@ RUN set -ex; \
   \
   SCALA_BINARY_VERSION=$(echo $SCALA_VERSION | cut -f 1-2 -d '.'); \
   mkdir -p /opt/kafka; \
-  curl -s   -o kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz.asc https://www.apache.org/dist/kafka/$KAFKA_VERSION/kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz.asc; \
-  curl -SLs -o kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz "https://www-eu.apache.org/dist/kafka/$KAFKA_VERSION/kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz"; \
+  curl -s   -o kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz.asc "https://downloads.apache.org/kafka/$KAFKA_VERSION/kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz.asc; \
+  curl -SLs -o kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz "https://downloads.apache.org/kafka/$KAFKA_VERSION/kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz"; \
   tar xzf kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz --strip-components=1 -C /opt/kafka; \
   rm kafka_$SCALA_BINARY_VERSION-$KAFKA_VERSION.tgz; \
   \
